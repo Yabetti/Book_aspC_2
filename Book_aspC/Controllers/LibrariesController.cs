@@ -12,7 +12,8 @@ namespace Book_aspC.Controllers
 {
     public class LibrariesController : Controller
     {
-        private UserDBContext db = new UserDBContext();
+        private LibraryDBContext db = new LibraryDBContext();
+        private UserDBContext user_db = new UserDBContext();
 
 
         //ログイン画面 + デフォルト画面
@@ -36,13 +37,47 @@ namespace Book_aspC.Controllers
         }
 
         // GET: Libraries
-        public ActionResult Index()
+        //param:usernameログインユーザネーム
+        //     :passwordログインユーザパスワード
+        //     :searchString 検索用単語
+        //[Authorize]
+        public ActionResult Index(String username ,String password, String searchString)
         {
-            return View(db.Libraries.ToList());
+            //ログイン画面からの遷移かチェック
+            if ((!String.IsNullOrEmpty(username)) && (!String.IsNullOrEmpty(password)))
+            {
+                //ログインチェック処理
+                foreach(User user_info in user_db.Users.ToList())
+                {
+                    if ((username == user_info.Username) && (password == user_info.Userpassword))
+                    {
+                        return View(db.Libraries.ToList());
+                    }
+                    else
+                    {
+                        return RedirectToAction("Common_error");
+                    }
+                }
+            }
+
+
+            //ログイン画面以外からの遷移処理
+            if (String.IsNullOrEmpty(searchString))
+            {
+                //全件返す
+                return View(db.Libraries.ToList());
+            }
+            //本一覧情報取得
+            var lib_list = from book in db.Libraries
+                           select book;
+            //一致するレコードの抽出
+            lib_list = lib_list.Where(b => b.Title.Contains(searchString));
+            
+            return View(lib_list);
         }
 
-        // GET: Libraries/Details/5
-        public ActionResult Details(int? id)
+            // GET: Libraries/Details/5
+            public ActionResult Details(int? id)
         {
             if (id == null)
             {

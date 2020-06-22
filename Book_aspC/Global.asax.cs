@@ -18,7 +18,10 @@ namespace Book_aspC
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            //Userテーブル作成用 
             //Database.SetInitializer<UserDBContext>(new Initialize_User_table());
+            //Libraryテーブル作成用
+            //Database.SetInitializer<LibraryDBContext>(new Initialize_Library_table());
         }
     }
 }

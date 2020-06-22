@@ -2,35 +2,44 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
+<h2>書籍一覧</h2>
 <div>
     @Html.Encode(ViewData["PostData"])
 </div>
+
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新規登録", "Create")
 </p>
+<!--検索機能追加箇所-->
+@using (Html.BeginForm("Index", "Libraries", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", null, new { @class = "form-control" })
+        <input type="submit" class="btn btn-default" value="検索" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            書籍ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Publisher)
+            書籍名
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            出版社
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Isbn)
-        </th>
-        <th></th>
+        <th>操作</th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -38,15 +47,9 @@
                 @Html.DisplayFor(modelItem => item.Publisher)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Isbn)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                @Html.ActionLink("編集", "Edit", new { id = item.ID })
+                @Html.ActionLink("詳細", "Details", new { id = item.ID })
+                @Html.ActionLink("削除", "Delete", new { id = item.ID })
             </td>
         </tr>
     }

@@ -167,3 +167,10 @@ html, body {
 }
 
 /*ログイン用　終了*/
+
+/*エラー画面用　開始*/
+.error-conntent {
+    background: white;
+    margin-top: 50px;
+    width: 80%;
+}

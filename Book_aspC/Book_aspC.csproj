@@ -132,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Initialize_Library_table.cs" />
     <Compile Include="Models\Initialize_User_table.cs" />
     <Compile Include="Models\Library.cs" />
     <Compile Include="Models\User.cs" />
@@ -184,6 +185,7 @@
     <Content Include="Views\Libraries\Login.cshtml" />
     <Content Include="Views\Libraries\Contact.cshtml" />
     <Content Include="Views\Libraries\Common_error.cshtml" />
+    <Content Include="Views\Shared\_Error_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

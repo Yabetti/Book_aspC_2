@@ -13,36 +13,13 @@ namespace Book_aspC.Controllers
     public class UsersController : Controller
     {
         private UserDBContext db = new UserDBContext();
+        private UserDBContext lib_db = new UserDBContext();
 
         // GET: Users
         [HttpPost]
-        public ActionResult Index(string username , string password)
+        public ActionResult Index( )
         {
-            //ViewBag.Message = username + password + "受信";
-            //return View(db.Users.ToList());
-            //検索
-            //複数条件の検索方法がわからないため、とりあえずforでまわす。
-            int login_check_flg = 0;
-            foreach (var user in db.Users)
-            {
-                if ((username == user.Username) || (password == user.Userpassword))
-                {
-                    login_check_flg = 1;
-                    break;
-                }
-            }
-            
-            if (login_check_flg == 1)
-            {
-                //書籍一覧へ
-                return View(db.Users.ToList());
-            }
-            else
-            {
-                //ログイン失敗画面
-                //return View("~/Views/Libraries/common_error.cshtml");
-                return RedirectToAction("Common_error", "Libraries");
-            }
+            return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5

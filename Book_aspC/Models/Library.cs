@@ -16,6 +16,6 @@ namespace Book_aspC.Models
 
     public class LibraryDBContext : DbContext
     {
-        public DbSet<Library> Librarys { get; set; }
+        public DbSet<Library> Libraries { get; set; }
     }
 }
